@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AboutView extends StatelessWidget {
+  // const AboutView({Key? key}) : super(key: key);
   const AboutView({super.key});
 
   @override

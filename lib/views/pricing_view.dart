@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PricingView extends StatelessWidget {
+  // const PricingView({Key? key}) : super(key: key);
   const PricingView({super.key});
 
   @override

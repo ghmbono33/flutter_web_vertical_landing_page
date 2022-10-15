@@ -1,5 +1,8 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:vertical_landing_page/providers/page_provider.dart';
 import 'package:vertical_landing_page/shared/custom_menu_item.dart';
 
 class CustomAppMenu extends StatefulWidget {
@@ -26,7 +29,9 @@ class _CustomAppMenuState extends State<CustomAppMenu>
 
   @override
   Widget build(BuildContext context) {
-    final paginas = ["home", "about", "contact", "location", "pricing"];
+    String capitalize(String text) => text[0].toUpperCase() + text.substring(1);
+
+    final paginas = context.read<PageProvider>().paginas;
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
@@ -36,25 +41,34 @@ class _CustomAppMenuState extends State<CustomAppMenu>
             isOpen = !isOpen;
           });
         },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 250),
+        child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           width: 150,
           color: Colors.black,
-          height: isOpen ? 300 : 50,
+          height: isOpen ? 310 : 50,
           child: Column(
             children: [
               _MenuTitle(isOpen: isOpen, controller: controller),
               if (isOpen)
                 const Divider(
                   color: Colors.white,
-                  thickness: 4,
+                  thickness: 2,
                 ),
               if (isOpen)
                 ...List.generate(
                     paginas.length,
-                    (index) =>
-                        CustomMenuItem(text: paginas[index], onPressed: () {}))
+                    (index) => FadeInLeft(
+                        from: 50,
+                        delay: Duration(milliseconds: 75 * index),
+                        duration: const Duration(milliseconds: 300),
+                        child: CustomMenuItem(
+                            text: capitalize(paginas[index]),
+                            onPressed: () {
+                              setState(() {
+                                isOpen = false;
+                              });
+                              context.read<PageProvider>().goTo(index);
+                            })))
             ],
           ),
         ),

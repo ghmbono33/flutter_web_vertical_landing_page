@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vertical_landing_page/providers/page_provider.dart';
 import 'package:vertical_landing_page/router/router.dart';
 import 'package:vertical_landing_page/scroll_pageview.dart';
 
 void main() {
   FRouter.configureRoutes();
-  runApp(const MyApp());
+  runApp(MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => PageProvider())],
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

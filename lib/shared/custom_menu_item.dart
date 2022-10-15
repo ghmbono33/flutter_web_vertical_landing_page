@@ -28,7 +28,7 @@ class _CustomMenuItemState extends State<CustomMenuItem> {
         });
       },
       child: GestureDetector(
-        onTap: () => widget.onPressed,
+        onTap: () => widget.onPressed(),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           width: 150,

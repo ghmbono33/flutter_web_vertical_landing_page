@@ -32,6 +32,7 @@ class _HomeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PageView(
+      // physics: const NeverScrollableScrollPhysics(),
       controller: context.read<PageProvider>().pageController,
       scrollDirection: Axis.vertical,
       children: const [

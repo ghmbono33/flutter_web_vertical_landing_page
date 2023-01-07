@@ -44,15 +44,16 @@ class _CustomAppMenuState extends State<CustomAppMenu>
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           width: 150,
+          height: 800,
           color: Colors.black,
-          height: isOpen ? 310 : 50,
+          // height: isOpen ? 310 : 50,
           child: Column(
             children: [
               _MenuTitle(isOpen: isOpen, controller: controller),
               if (isOpen)
                 const Divider(
-                  color: Colors.white,
                   thickness: 2,
+                  color: Colors.white,
                 ),
               if (isOpen)
                 ...List.generate(
@@ -68,7 +69,16 @@ class _CustomAppMenuState extends State<CustomAppMenu>
                                 isOpen = false;
                               });
                               context.read<PageProvider>().goTo(index);
-                            })))
+                            }))),
+              DropdownButton<int>(
+                items: List.generate(
+                    4,
+                    (index) => DropdownMenuItem<int>(
+                          value: index,
+                          child: Text("Opción $index"),
+                        )),
+                onChanged: (value) => print(value),
+              )
             ],
           ),
         ),
